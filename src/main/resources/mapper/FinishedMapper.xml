@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.FinishedMapper">
+  <resultMap id="BaseResultMap" type="com.qf.bean.Finished">
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="qid" jdbcType="INTEGER" property="qid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="rwstatus" jdbcType="INTEGER" property="rwstatus" />
+    <result column="colstatus" jdbcType="INTEGER" property="colstatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, qid, uid, rwstatus, colstatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from finished
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from finished
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qf.bean.Finished">
+    insert into finished (fid, qid, uid, 
+      rwstatus, colstatus)
+    values (#{fid,jdbcType=INTEGER}, #{qid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{rwstatus,jdbcType=INTEGER}, #{colstatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.bean.Finished">
+    insert into finished
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="rwstatus != null">
+        rwstatus,
+      </if>
+      <if test="colstatus != null">
+        colstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="qid != null">
+        #{qid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="rwstatus != null">
+        #{rwstatus,jdbcType=INTEGER},
+      </if>
+      <if test="colstatus != null">
+        #{colstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.bean.Finished">
+    update finished
+    <set>
+      <if test="qid != null">
+        qid = #{qid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="rwstatus != null">
+        rwstatus = #{rwstatus,jdbcType=INTEGER},
+      </if>
+      <if test="colstatus != null">
+        colstatus = #{colstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.bean.Finished">
+    update finished
+    set qid = #{qid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      rwstatus = #{rwstatus,jdbcType=INTEGER},
+      colstatus = #{colstatus,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>
